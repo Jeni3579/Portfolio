@@ -9,20 +9,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <!-- Animated Background -->
     <div class="bg-animation">
         <div class="grid-lines"></div>
         <div class="glow-spot"></div>
+        <div class="matrix-rain"></div>
     </div>
 
-    <!-- Theme Toggle -->
     <div class="theme-toggle">
         <button id="themeToggle" aria-label="Toggle theme">
             <i class="fas fa-moon"></i>
         </button>
     </div>
 
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -37,7 +35,6 @@
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="projects.html" class="nav-link">Projects</a></li>
                 <li><a href="contact.html" class="nav-link active">Contact</a></li>
             </ul>
@@ -45,7 +42,6 @@
     </nav>
 
     <main>
-        <!-- Page Hero -->
         <section class="page-hero">
             <div class="container">
                 <div class="page-hero-content">
@@ -55,11 +51,9 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section class="contact-section">
             <div class="container">
-                <div class="contact-grid">
-                    <!-- Contact Info -->
+                <div class="contact-grid-single">
                     <div class="contact-info">
                         <h2>Let's Connect</h2>
                         <p>I'm always open to discussing security projects, research collaborations, or potential opportunities. Feel free to reach out!</p>
@@ -95,54 +89,20 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Contact Form -->
-                    <div class="contact-form">
-                        <h2>Send a Message</h2>
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">Name *</label>
-                                <input type="text" id="name" name="name" required>
-                                <span class="error-message" id="nameError"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
-                                <span class="error-message" id="emailError"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" rows="5" required></textarea>
-                                <span class="error-message" id="messageError"></span>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-paper-plane"></i>
-                                Send Message
-                            </button>
-                        </form>
-                        <div id="formSuccess" class="form-success" style="display: none;">
-                            <i class="fas fa-check-circle"></i>
-                            <p>Message sent successfully! I'll respond within 24-48 hours.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <div class="footer-logo">
-                        <span>&lt;JENI.K/&gt;</span>
-                    </div>
+                    <div class="footer-logo"><span>JENI.KADARIYA</span></div>
                     <p>Cybersecurity Professional | Security Researcher</p>
                 </div>
                 <div class="footer-links">
                     <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
                     <a href="projects.html">Projects</a>
                     <a href="contact.html">Contact</a>
                 </div>
@@ -152,9 +112,7 @@
                     <a href="mailto:kadariyajennie3579@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 JENI KADARIYA. All rights reserved.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2024 JENI KADARIYA. All rights reserved.</p></div>
         </div>
     </footer>
 

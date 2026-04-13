@@ -3,13 +3,10 @@
    Main JavaScript File
    ============================================ */
 
-// ============================================
-// Theme Toggle (Dark/Light Mode)
-// ============================================
+// Theme Toggle
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = themeToggle.querySelector('i');
 
-// Check for saved theme preference
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -35,9 +32,7 @@ function updateThemeIcon(theme) {
     }
 }
 
-// ============================================
 // Mobile Navigation Toggle
-// ============================================
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -48,7 +43,6 @@ if (navToggle) {
     });
 }
 
-// Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navToggle.classList.remove('active');
@@ -56,72 +50,8 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// ============================================
-// Typing Animation
-// ============================================
-const typingTextElement = document.getElementById('typingText');
-if (typingTextElement) {
-    const phrases = [
-        'Penetration Tester',
-        'Digital Forensics Analyst',
-        'Security Researcher',
-        'AI Threat Detection Specialist'
-    ];
-    
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function typeEffect() {
-        const currentPhrase = phrases[phraseIndex];
-        
-        if (isDeleting) {
-            typingTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            typingTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            isDeleting = true;
-            setTimeout(typeEffect, 2000);
-            return;
-        }
-        
-        if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-        }
-        
-        const speed = isDeleting ? 50 : 100;
-        setTimeout(typeEffect, speed);
-    }
-    
-    typeEffect();
-}
-
-// ============================================
-// Smooth Scrolling
-// ============================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// ============================================
-// Sticky Navbar on Scroll
-// ============================================
+// Sticky Navbar
 const navbar = document.getElementById('navbar');
-let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
@@ -133,13 +63,9 @@ window.addEventListener('scroll', () => {
         navbar.style.background = 'var(--bg-primary)';
         navbar.style.boxShadow = 'none';
     }
-    
-    lastScroll = currentScroll;
 });
 
-// ============================================
-// Scroll Animation (Fade In)
-// ============================================
+// Scroll Animation
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -154,78 +80,17 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.skill-card, .project-card, .cert-card, .timeline-item').forEach(el => {
+document.querySelectorAll('.skill-card, .project-card, .skill-category, .about-grid').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
 
-// ============================================
-// Contact Form Validation
-// ============================================
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        let isValid = true;
-        
-        // Name validation
-        const name = document.getElementById('name');
-        const nameError = document.getElementById('nameError');
-        if (!name.value.trim()) {
-            nameError.textContent = 'Name is required';
-            isValid = false;
-        } else {
-            nameError.textContent = '';
-        }
-        
-        // Email validation
-        const email = document.getElementById('email');
-        const emailError = document.getElementById('emailError');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email.value.trim() || !emailRegex.test(email.value)) {
-            emailError.textContent = 'Valid email is required';
-            isValid = false;
-        } else {
-            emailError.textContent = '';
-        }
-        
-        // Message validation
-        const message = document.getElementById('message');
-        const messageError = document.getElementById('messageError');
-        if (!message.value.trim()) {
-            messageError.textContent = 'Message is required';
-            isValid = false;
-        } else {
-            messageError.textContent = '';
-        }
-        
-        if (isValid) {
-            // Show success message
-            contactForm.style.display = 'none';
-            formSuccess.style.display = 'block';
-            
-            // Reset form after 3 seconds
-            setTimeout(() => {
-                contactForm.reset();
-                contactForm.style.display = 'block';
-                formSuccess.style.display = 'none';
-            }, 3000);
-        }
-    });
-}
-
-// ============================================
-// Project Modal Functionality
-// ============================================
+// Project Modal
 const modal = document.getElementById('projectModal');
 const modalBody = document.getElementById('modalBody');
 
-// Project details data
 const projectDetails = {
     1: {
         title: 'Web Application Security Audit',
@@ -264,7 +129,6 @@ const projectDetails = {
     }
 };
 
-// View Details button listeners
 document.querySelectorAll('.view-details').forEach(button => {
     button.addEventListener('click', () => {
         const projectId = button.getAttribute('data-project');
@@ -272,36 +136,17 @@ document.querySelectorAll('.view-details').forEach(button => {
         
         if (project && modal) {
             modalBody.innerHTML = `
-                <h2 style="color: var(--accent-cyan); margin-bottom: 20px;">${project.title}</h2>
-                
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Problem</h3>
-                    <p style="color: var(--text-secondary);">${project.problem}</p>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Approach</h3>
-                    <p style="color: var(--text-secondary);">${project.approach}</p>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Tools Used</h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-                        ${project.tools.split(', ').map(tool => `<span style="background: var(--bg-hover); padding: 4px 12px; border-radius: 4px; font-size: 0.8rem;">${tool}</span>`).join('')}
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Result / Learning</h3>
-                    <p style="color: var(--text-secondary);">${project.result}</p>
-                </div>
+                <h2 style="color: var(--accent-green); margin-bottom: 20px;">${project.title}</h2>
+                <div style="margin-bottom: 20px;"><h3 style="color: var(--accent-green); margin-bottom: 10px;">Problem</h3><p style="color: var(--text-secondary);">${project.problem}</p></div>
+                <div style="margin-bottom: 20px;"><h3 style="color: var(--accent-green); margin-bottom: 10px;">Approach</h3><p style="color: var(--text-secondary);">${project.approach}</p></div>
+                <div style="margin-bottom: 20px;"><h3 style="color: var(--accent-green); margin-bottom: 10px;">Tools Used</h3><div style="display: flex; flex-wrap: wrap; gap: 8px;">${project.tools.split(', ').map(tool => `<span style="background: var(--bg-hover); padding: 4px 12px; border-radius: 4px; font-size: 0.8rem;">${tool}</span>`).join('')}</div></div>
+                <div><h3 style="color: var(--accent-green); margin-bottom: 10px;">Result / Learning</h3><p style="color: var(--text-secondary);">${project.result}</p></div>
             `;
             modal.classList.add('active');
         }
     });
 });
 
-// Close modal
 const modalClose = document.querySelector('.modal-close');
 if (modalClose) {
     modalClose.addEventListener('click', () => {
@@ -309,16 +154,13 @@ if (modalClose) {
     });
 }
 
-// Close modal when clicking outside
 window.addEventListener('click', (e) => {
     if (modal && e.target === modal) {
         modal.classList.remove('active');
     }
 });
 
-// ============================================
-// Active Navigation Link Highlighting
-// ============================================
+// Active Navigation Link
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-link').forEach(link => {
     const href = link.getAttribute('href');
@@ -329,7 +171,5 @@ document.querySelectorAll('.nav-link').forEach(link => {
     }
 });
 
-// ============================================
-// Console Welcome Message
-// ============================================
-console.log('%c╔═══════════════════════════════════════════════════════════╗\n║                                                           ║\n║   🔐 JENI KADARIYA | Cybersecurity Portfolio              ║\n║   Modern Cybersecurity Professional Portfolio             ║\n║                                                           ║\n║   Explore: projects | security audits | forensics        ║\n║   Contact: kadariyajennie3579@gmail.com                  ║\n║   GitHub: https://github.com/Jeni3579                    ║\n║                                                           ║\n╚═══════════════════════════════════════════════════════════╝', 'color: #00ff9d; font-family: monospace;');
+// Console Welcome
+console.log('%c╔═══════════════════════════════════════════════════════════╗\n║                                                           ║\n║   🔐 JENI KADARIYA | Cybersecurity Portfolio              ║\n║   Kali Linux Themed Portfolio                             ║\n║                                                           ║\n║   Contact: kadariyajennie3579@gmail.com                  ║\n║   GitHub: https://github.com/Jeni3579                    ║\n║                                                           ║\n╚═══════════════════════════════════════════════════════════╝', 'color: #00cc00; font-family: monospace;');
