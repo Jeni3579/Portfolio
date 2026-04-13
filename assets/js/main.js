@@ -1,9 +1,11 @@
 /* ============================================
    JENI KADARIYA - Cybersecurity Portfolio
-   Main JavaScript File
+   SOC Dashboard Style - Main JavaScript
    ============================================ */
 
-// Theme Toggle
+// ============================================
+// Dark/Light Mode Toggle
+// ============================================
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = themeToggle.querySelector('i');
 
@@ -32,7 +34,9 @@ function updateThemeIcon(theme) {
     }
 }
 
+// ============================================
 // Mobile Navigation Toggle
+// ============================================
 const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
@@ -50,22 +54,91 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Sticky Navbar
+// ============================================
+// Typing Animation for Hero Section
+// ============================================
+const typingTextElement = document.getElementById('typingText');
+if (typingTextElement) {
+    const roles = [
+        'Cybersecurity & Ethical Hacking Student',
+        'SOC Analyst in Training',
+        'GRC & Compliance Enthusiast',
+        'Threat Intelligence Researcher'
+    ];
+    
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typeEffect() {
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+            typingTextElement.textContent = currentRole.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingTextElement.textContent = currentRole.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        if (!isDeleting && charIndex === currentRole.length) {
+            isDeleting = true;
+            setTimeout(typeEffect, 2000);
+            return;
+        }
+        
+        if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            roleIndex = (roleIndex + 1) % roles.length;
+        }
+        
+        const speed = isDeleting ? 50 : 100;
+        setTimeout(typeEffect, speed);
+    }
+    
+    typeEffect();
+}
+
+// ============================================
+// Smooth Scrolling for Anchor Links
+// ============================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId !== '#') {
+            e.preventDefault();
+            const target = document.querySelector(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    });
+});
+
+// ============================================
+// Sticky Navbar on Scroll
+// ============================================
 const navbar = document.getElementById('navbar');
+let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
-    if (currentScroll > 100) {
-        navbar.style.background = 'var(--bg-primary)';
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+    if (currentScroll > 50) {
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
     } else {
-        navbar.style.background = 'var(--bg-primary)';
         navbar.style.boxShadow = 'none';
     }
+    
+    lastScroll = currentScroll;
 });
 
-// Scroll Animation
+// ============================================
+// Scroll Animation (Fade In on Scroll)
+// ============================================
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -80,14 +153,72 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.skill-card, .project-card, .skill-category, .about-grid').forEach(el => {
+document.querySelectorAll('.skill-card, .project-card, .about-content, .interest-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
 
-// Project Modal
+// ============================================
+// Contact Form Validation
+// ============================================
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        let isValid = true;
+        
+        // Name validation
+        const name = document.getElementById('name');
+        const nameError = document.getElementById('nameError');
+        if (!name.value.trim()) {
+            nameError.textContent = 'Name is required';
+            isValid = false;
+        } else {
+            nameError.textContent = '';
+        }
+        
+        // Email validation
+        const email = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim() || !emailRegex.test(email.value)) {
+            emailError.textContent = 'Valid email is required';
+            isValid = false;
+        } else {
+            emailError.textContent = '';
+        }
+        
+        // Message validation
+        const message = document.getElementById('message');
+        const messageError = document.getElementById('messageError');
+        if (!message.value.trim()) {
+            messageError.textContent = 'Message is required';
+            isValid = false;
+        } else {
+            messageError.textContent = '';
+        }
+        
+        if (isValid) {
+            contactForm.style.display = 'none';
+            formSuccess.style.display = 'block';
+            
+            setTimeout(() => {
+                contactForm.reset();
+                contactForm.style.display = 'block';
+                formSuccess.style.display = 'none';
+            }, 3000);
+        }
+    });
+}
+
+// ============================================
+// Project Modal Functionality
+// ============================================
 const modal = document.getElementById('projectModal');
 const modalBody = document.getElementById('modalBody');
 
@@ -136,11 +267,25 @@ document.querySelectorAll('.view-details').forEach(button => {
         
         if (project && modal) {
             modalBody.innerHTML = `
-                <h2 style="color: var(--accent-green); margin-bottom: 20px;">${project.title}</h2>
-                <div style="margin-bottom: 20px;"><h3 style="color: var(--accent-green); margin-bottom: 10px;">Problem</h3><p style="color: var(--text-secondary);">${project.problem}</p></div>
-                <div style="margin-bottom: 20px;"><h3 style="color: var(--accent-green); margin-bottom: 10px;">Approach</h3><p style="color: var(--text-secondary);">${project.approach}</p></div>
-                <div style="margin-bottom: 20px;"><h3 style="color: var(--accent-green); margin-bottom: 10px;">Tools Used</h3><div style="display: flex; flex-wrap: wrap; gap: 8px;">${project.tools.split(', ').map(tool => `<span style="background: var(--bg-hover); padding: 4px 12px; border-radius: 4px; font-size: 0.8rem;">${tool}</span>`).join('')}</div></div>
-                <div><h3 style="color: var(--accent-green); margin-bottom: 10px;">Result / Learning</h3><p style="color: var(--text-secondary);">${project.result}</p></div>
+                <h2 style="color: var(--accent-cyan); margin-bottom: 20px;">${project.title}</h2>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Problem</h3>
+                    <p style="color: var(--text-secondary);">${project.problem}</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Approach</h3>
+                    <p style="color: var(--text-secondary);">${project.approach}</p>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Tools Used</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        ${project.tools.split(', ').map(tool => `<span style="background: var(--bg-hover); padding: 4px 12px; border-radius: 4px; font-size: 0.8rem;">${tool}</span>`).join('')}
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: var(--accent-green); margin-bottom: 10px;">Result / Learning</h3>
+                    <p style="color: var(--text-secondary);">${project.result}</p>
+                </div>
             `;
             modal.classList.add('active');
         }
@@ -160,7 +305,9 @@ window.addEventListener('click', (e) => {
     }
 });
 
-// Active Navigation Link
+// ============================================
+// Active Navigation Link Highlighting
+// ============================================
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-link').forEach(link => {
     const href = link.getAttribute('href');
@@ -171,5 +318,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     }
 });
 
-// Console Welcome
-console.log('%c╔═══════════════════════════════════════════════════════════╗\n║                                                           ║\n║   🔐 JENI KADARIYA | Cybersecurity Portfolio              ║\n║   Kali Linux Themed Portfolio                             ║\n║                                                           ║\n║   Contact: kadariyajennie3579@gmail.com                  ║\n║   GitHub: https://github.com/Jeni3579                    ║\n║                                                           ║\n╚═══════════════════════════════════════════════════════════╝', 'color: #00cc00; font-family: monospace;');
+// ============================================
+// Console Welcome Message
+// ============================================
+console.log('%c╔═══════════════════════════════════════════════════════════╗\n║                                                           ║\n║   🔐 JENI KADARIYA | Cybersecurity Portfolio              ║\n║   SOC Dashboard Style - Professional Portfolio            ║\n║                                                           ║\n║   Contact: kadariyajennie3579@gmail.com                  ║\n║   GitHub: https://github.com/Jeni3579                    ║\n║   LinkedIn: linkedin.com/in/jeni-kadariya-0620a2279     ║\n║                                                           ║\n╚═══════════════════════════════════════════════════════════╝', 'color: #00e5ff; font-family: monospace;');

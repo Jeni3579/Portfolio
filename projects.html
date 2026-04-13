@@ -9,23 +9,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="bg-animation">
-        <div class="grid-lines"></div>
-        <div class="glow-spot"></div>
-        <div class="matrix-rain"></div>
+    <!-- Animated Cyber Grid Background -->
+    <div class="cyber-bg">
+        <div class="grid-overlay"></div>
+        <div class="scan-line"></div>
     </div>
 
+    <!-- Dark/Light Mode Toggle -->
     <div class="theme-toggle">
         <button id="themeToggle" aria-label="Toggle theme">
             <i class="fas fa-moon"></i>
         </button>
     </div>
 
+    <!-- Sticky Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">
                 <a href="index.html">
-                    <span class="logo-text">JENI.KADARIYA</span>
+                    <span class="logo-bracket">&lt;</span>
+                    <span class="logo-text">JENI.K</span>
+                    <span class="logo-bracket">/&gt;</span>
                 </a>
             </div>
             <div class="nav-toggle" id="navToggle">
@@ -42,18 +46,21 @@
     </nav>
 
     <main>
-        <section class="page-hero">
+        <!-- Page Header -->
+        <section class="page-header">
             <div class="container">
-                <div class="page-hero-content">
-                    <h1>My Projects</h1>
+                <div class="page-header-content">
+                    <h1>Security Projects</h1>
                     <p>A showcase of my security research, tools, and investigations</p>
                 </div>
             </div>
         </section>
 
+        <!-- Projects Grid -->
         <section class="all-projects">
             <div class="container">
                 <div class="projects-grid" id="projectsGrid">
+                    <!-- Project 1 -->
                     <div class="project-card" data-project="1">
                         <div class="project-tags">
                             <span class="tag">Security Audit</span>
@@ -74,6 +81,7 @@
                         </div>
                     </div>
 
+                    <!-- Project 2 -->
                     <div class="project-card" data-project="2">
                         <div class="project-tags">
                             <span class="tag">AI Security</span>
@@ -94,6 +102,7 @@
                         </div>
                     </div>
 
+                    <!-- Project 3 -->
                     <div class="project-card" data-project="3">
                         <div class="project-tags">
                             <span class="tag">Digital Forensics</span>
@@ -114,6 +123,7 @@
                         </div>
                     </div>
 
+                    <!-- Project 4 -->
                     <div class="project-card" data-project="4">
                         <div class="project-tags">
                             <span class="tag">Security Tool</span>
@@ -134,6 +144,7 @@
                         </div>
                     </div>
 
+                    <!-- Project 5 -->
                     <div class="project-card" data-project="5">
                         <div class="project-tags">
                             <span class="tag">Security Tool</span>
@@ -157,6 +168,7 @@
         </section>
     </main>
 
+    <!-- Project Details Modal -->
     <div class="modal" id="projectModal">
         <div class="modal-content">
             <button class="modal-close">&times;</button>
@@ -164,12 +176,15 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
-                    <div class="footer-logo"><span>JENI.KADARIYA</span></div>
-                    <p>Cybersecurity Professional | Security Researcher</p>
+                    <div class="footer-logo">
+                        <span>&lt;JENI.K/&gt;</span>
+                    </div>
+                    <p>Cybersecurity Professional | Ethical Hacker</p>
                 </div>
                 <div class="footer-links">
                     <a href="index.html">Home</a>
@@ -182,7 +197,9 @@
                     <a href="mailto:kadariyajennie3579@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
-            <div class="footer-bottom"><p>&copy; JENI KADARIYA</p></div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 JENI KADARIYA. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
