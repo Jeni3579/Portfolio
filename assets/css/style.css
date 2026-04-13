@@ -1042,3 +1042,109 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* ============================================
+   Kali Linux Theme Additions
+   ============================================ */
+
+/* Kali Linux Green Color Overrides */
+:root {
+    --kali-green: #00cc00;
+    --kali-dark: #0a0e0a;
+    --kali-terminal: #1a1e1a;
+    --kali-glow: rgba(0, 204, 0, 0.3);
+}
+
+/* Matrix Rain Effect */
+.matrix-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Terminal-style cursor blink */
+.hero-badge {
+    border-color: var(--kali-green);
+}
+
+.badge-dot {
+    background-color: var(--kali-green);
+    animation: kali-blink 1s infinite;
+}
+
+@keyframes kali-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Kali-style scanline effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 255, 0, 0.03) 0px,
+        rgba(0, 255, 0, 0.03) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Glitch text effect for name */
+.name {
+    position: relative;
+    animation: kali-glitch 3s infinite;
+}
+
+@keyframes kali-glitch {
+    0%, 100% { text-shadow: 2px 0 var(--kali-green), -2px 0 var(--kali-green); }
+    33% { text-shadow: 2px 0 var(--kali-green), -2px 0 var(--kali-green); }
+    34% { text-shadow: none; }
+    66% { text-shadow: none; }
+    67% { text-shadow: 2px 0 var(--kali-green), -2px 0 var(--kali-green); }
+}
+
+/* Kali-style buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--kali-green), #008800);
+    box-shadow: 0 0 10px var(--kali-glow);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 20px var(--kali-green);
+}
+
+/* Kali-style skill cards */
+.skill-card {
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    border-bottom-color: var(--kali-green);
+    box-shadow: 0 5px 20px var(--kali-glow);
+}
+
+/* Kali-style project cards */
+.project-card {
+    border-left: 2px solid transparent;
+}
+
+.project-card:hover {
+    border-left-color: var(--kali-green);
+}
+
+/* Kali-style tags */
+.tag {
+    background: rgba(0, 204, 0, 0.1);
+    border-left: 2px solid var(--kali-green);
+}
